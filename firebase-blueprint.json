@@ -1,0 +1,60 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile information.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Unique user ID." },
+        "email": { "type": "string", "description": "User email address." },
+        "displayName": { "type": "string", "description": "User display name." },
+        "photoURL": { "type": "string", "description": "User profile photo URL." },
+        "createdAt": { "type": "string", "format": "date-time", "description": "When the user account was created." },
+        "lastLogin": { "type": "string", "format": "date-time", "description": "Last login timestamp." }
+      },
+      "required": ["uid", "email"]
+    },
+    "Session": {
+      "title": "Session",
+      "description": "A cybersecurity lab session.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique session ID." },
+        "userId": { "type": "string", "description": "ID of the user who owns the session." },
+        "startTime": { "type": "string", "format": "date-time", "description": "When the session started." },
+        "endTime": { "type": "string", "format": "date-time", "description": "When the session ended (optional)." },
+        "status": { "type": "string", "enum": ["active", "completed"], "description": "Current status of the session." }
+      },
+      "required": ["id", "userId", "startTime", "status"]
+    },
+    "CommandLog": {
+      "title": "CommandLog",
+      "description": "A log entry for a command executed in a session.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique log ID." },
+        "sessionId": { "type": "string", "description": "ID of the session this log belongs to." },
+        "userId": { "type": "string", "description": "ID of the user who executed the command." },
+        "command": { "type": "string", "description": "The command executed." },
+        "description": { "type": "string", "description": "Description of what the command does." },
+        "output": { "type": "string", "description": "Simulated output of the command." },
+        "timestamp": { "type": "string", "format": "date-time", "description": "When the command was executed." }
+      },
+      "required": ["id", "sessionId", "userId", "command", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile documents."
+    },
+    "/sessions/{sessionId}": {
+      "schema": "Session",
+      "description": "Session metadata documents."
+    },
+    "/sessions/{sessionId}/logs/{logId}": {
+      "schema": "CommandLog",
+      "description": "Command logs within a session."
+    }
+  }
+}

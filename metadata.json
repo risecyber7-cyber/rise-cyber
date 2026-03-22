@@ -1,0 +1,5 @@
+{
+  "name": "CyberOS AI Core",
+  "description": "A full-featured web-based operating system powered by an intelligent AI kernel, featuring a virtual filesystem, terminal, window manager, and desktop environment.",
+  "requestFramePermissions": []
+}
